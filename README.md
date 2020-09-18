@@ -1,4 +1,4 @@
-# couchbase-test
+# Vonage call event logger using Couchbase
 
 Vonage call event logger using Couchbase as the store. This is not a standlone logger, just some code that can be added to a voice app. 
 
