@@ -29,7 +29,7 @@ from couchbase.cluster import QueryOptions
 
 # get a reference to our cluster
 cluster = Cluster('couchbase://localhost', ClusterOptions(
-  PasswordAuthenticator('Administrator', '090662')))
+  PasswordAuthenticator('Administrator', 'xxxxxx')))
 
 # get a reference to our bucket
 cb = cluster.bucket('events')
