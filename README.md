@@ -19,3 +19,4 @@ You can test via `ngrok` with Couchbase running locally.
 ## TODO
 
 - [ ] Make a standalone version (currently in-app)
+- [ ] Resolve [locking issue](https://forums.couchbase.com/t/couldnt-lock-exception-even-with-lockmode-wait-passed/27409)
