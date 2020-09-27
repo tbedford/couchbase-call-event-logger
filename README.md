@@ -15,3 +15,7 @@ The following diagram provides a simple overview of the application:
 ## Testing
 
 You can test via `ngrok` with Couchbase running locally.
+
+## TODO
+
+- [ ] Make a standalone version (currently in-app)
