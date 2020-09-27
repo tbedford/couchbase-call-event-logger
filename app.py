@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 from pprint import pprint
 import json
 from uuid import uuid4
+import os
+from dotenv import load_dotenv
 
 ncco = [
     {
@@ -9,6 +11,9 @@ ncco = [
         "text": "You have reached your Nexmo number"
     }
 ]
+
+load_dotenv()
+db_password = os.getenv("DB_PASSWORD")
 
 def upsert_document(cb_coll, doc):
   print("\nUpsert CAS: ")
@@ -29,7 +34,7 @@ from couchbase.cluster import QueryOptions
 
 # get a reference to our cluster
 cluster = Cluster('couchbase://localhost', ClusterOptions(
-  PasswordAuthenticator('Administrator', 'xxxxxx')))
+  PasswordAuthenticator('Administrator', db_password)))
 
 # get a reference to our bucket
 cb = cluster.bucket('events')
