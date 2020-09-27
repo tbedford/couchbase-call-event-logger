@@ -2,34 +2,30 @@ from flask import Flask, request, jsonify
 from pprint import pprint
 import json
 from uuid import uuid4
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+db_password = os.getenv("DB_PASSWORD")
+nexmo_number = os.getenv("NEXMO_NUMBER")
+to_number = os.getenv("TO_NUMBER")
 
 ncco = [
-    {
-        "action": "talk",
-        "text": "You have reached your Nexmo number"
-    }
-]
-
-NEXMO_NUMBER = '44741834xxxx'
-TO_NUMBER = '44793155xxxx'
-
-ncco2 = [
     {
         "action": "talk",
         "text": "Now connecting you to phone endpoint"
     },
     {
         "action": "connect",
-        "from": NEXMO_NUMBER,
+        "from": nexmo_number,
         "endpoint": [
             {
                 "type": "phone",
-                "number": TO_NUMBER
+                "number": to_number
             }
         ]
     }
 ]
-
 
 def upsert_document(cb_coll, doc):
   print("\nUpsert CAS: ")
@@ -50,7 +46,7 @@ from couchbase.cluster import QueryOptions
 
 # get a reference to our cluster
 cluster = Cluster('couchbase://localhost', ClusterOptions(
-  PasswordAuthenticator('Administrator', 'xxxxxx')), lockmode=2) # added lockmode to avoid locking error
+  PasswordAuthenticator('Administrator', db_password)), lockmode=2) # added lockmode to avoid locking error
 
 # get a reference to our bucket
 cb = cluster.bucket('events')
@@ -64,7 +60,7 @@ app = Flask(__name__)
 def answer():
     params = request.args
     pprint(params)
-    return jsonify(ncco2)
+    return jsonify(ncco)
 
 @app.route("/webhooks/event", methods=['POST'])
 def events():
