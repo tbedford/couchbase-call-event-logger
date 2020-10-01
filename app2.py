@@ -68,7 +68,7 @@ def events():
     pprint(data) # Prints Python data structure
     event = data  # Don't even need to do json.dumps(data) to convert Python object to JSON string as the Couchbase SDK seems to do this
     upsert_document(cb_coll, event) # Locking issue   
-    return "200"
+    return "OK"
 
 if __name__ == '__main__':
     print("Running locally")
